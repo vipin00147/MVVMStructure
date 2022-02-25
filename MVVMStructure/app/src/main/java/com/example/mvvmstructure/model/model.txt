@@ -1,0 +1,1 @@
+declare your app models inside this package
