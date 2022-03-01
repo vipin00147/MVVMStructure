@@ -1,5 +1,6 @@
 package com.example.mvvmstructure.ui.base
 
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.mvvmstructure.R
@@ -22,11 +23,11 @@ abstract class BaseActivity  : AppCompatActivity() {
     }
 
     fun apiResponseErrorHandling(errorMsg: String, errorCode: Int) {
-
+        Toast.makeText(this, "$errorCode $errorMsg", Toast.LENGTH_SHORT).show()
     }
 
-    fun ApiFailure(errorMsg: String) {
-
+    fun apiFailure(errorMsg: String) {
+        Toast.makeText(this, "$errorMsg", Toast.LENGTH_SHORT).show()
     }
 
 }

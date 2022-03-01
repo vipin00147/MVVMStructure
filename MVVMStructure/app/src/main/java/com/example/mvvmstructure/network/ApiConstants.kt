@@ -17,7 +17,7 @@ object ApiConstants {
     private var retrofit : Retrofit? = null
     private var okHttpClient: OkHttpClient? = null
     val BASE_URL: String
-        get() = "http://157.245.218.104:9005"
+        get() = "http://"           //http URL
 
 
     // Create Service

@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmstructure.R
 import com.example.mvvmstructure.databinding.FragmentMainBinding
 import com.example.mvvmstructure.ui.base.BaseFragment
+import com.example.mvvmstructure.utils.ViewModelFactory
+import com.example.mvvmstructure.viewModel.AppViewModel
 
 class MainFragment : BaseFragment() {
 
@@ -26,11 +29,6 @@ class MainFragment : BaseFragment() {
             rootView = binding?.root
         }
         return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
 }

@@ -8,7 +8,11 @@ import com.example.mvvmstructure.R
 import com.example.mvvmstructure.ui.activity.MainActivity
 import com.example.mvvmstructure.utils.ConnectivityReceiver
 import com.google.gson.JsonElement
+import com.netset.counterbook.network.ApiConstants
 import com.netset.counterbook.network.responseAndErrorHandle.ApiResponse
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +22,8 @@ class AppViewModel(val mainActivity: MainActivity) : ViewModel(), ApiResponse, C
     lateinit var apiResponse : ApiResponse
     val isProgressShowing : MutableLiveData<Boolean> = MutableLiveData()
 
+    var loginCall : Call<JsonElement>? = null
+
     fun hitApi(call: Call<JsonElement>?, showProgress: Boolean, context: Context, listener: ApiResponse) {
 
         if (ConnectivityReceiver().isConnectedOrConnecting(context)) {
@@ -26,7 +32,7 @@ class AppViewModel(val mainActivity: MainActivity) : ViewModel(), ApiResponse, C
             apiResponse = listener
         } else {
             android.os.Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                mainActivity.ApiFailure(context.getString(R.string.no_internet_available))
+                mainActivity.apiFailure(context.getString(R.string.no_internet_available))
             }, 200)
         }
     }
@@ -46,6 +52,7 @@ class AppViewModel(val mainActivity: MainActivity) : ViewModel(), ApiResponse, C
 
     override fun onFailure(call: Call<JsonElement>, t: Throwable) {
         isProgressShowing.value = false
-        mainActivity.ApiFailure(t.message.toString())
+        mainActivity.apiFailure(t.message.toString())
     }
+
 }
